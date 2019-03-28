@@ -161,4 +161,4 @@ WHERE jiraissue.project =00000
             AND cfv.customfield = 10008) IS NOT NULL
     AND jiraissue.issuestatus::int NOT IN (00001, 00002, 00003, 00004)
     AND (jiraissue.resolutiondate IS NULL
-        OR jiraissue.resolutiondate::date > (CURRENT_DATE::date - INTERVAL '1 month')::date)
+        OR jiraissue.resolutiondate::date > (CURRENT_DATE - INTERVAL '1 month')::date)
