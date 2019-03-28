@@ -9,8 +9,7 @@ WITH
             WHERE jiraissue.project = 00001
                 AND jiraissue.issuetype::int = 00002 -- Story
                 AND jiraissue.issuestatus::int NOT IN (00001, 00002, 00003, 00004, 00005)
-            GROUP BY table_2."ID") AS issues_with_or
-    ),
+            GROUP BY table_2."ID") AS issues_with_or),
     with_2 AS
     (SELECT COUNT("ID")
         FROM
@@ -22,8 +21,7 @@ WITH
                 AND jiraissue.issuetype::int = 00002 -- Story
                 AND jiraissue.issuestatus::int = 00004 -- Completed
                 AND date_trunc('month', jiraissue.resolutiondate)::date = date_trunc('month', CURRENT_DATE)::date
-            GROUP BY table_2."ID") AS issues_with_or
-    ),
+            GROUP BY table_2."ID") AS issues_with_or),
     with_3 AS
     (SELECT COUNT("ID")
         FROM
@@ -43,8 +41,7 @@ WITH
                         WHERE cfo.id::int = cfv.stringvalue::int) = 'Task Completed'
                 AND date_trunc('month', jiraissue.duedate)::date = date_trunc('month', CURRENT_DATE + INTERVAL '1 month')::date -- Deadline specified for the next month
                 AND date_trunc('month', jiraissue.updated)::date = date_trunc('month', CURRENT_DATE)::date
-            GROUP BY table_2."ID") AS issues_with_or
-    ),
+            GROUP BY table_2."ID") AS issues_with_or),
     with_4 AS
     (SELECT COUNT("ID")
         FROM
@@ -56,8 +53,7 @@ WITH
                 AND jiraissue.issuetype::int = 00002 -- Story
                 AND jiraissue.issuestatus::int NOT IN (00001, 00002, 00003, 00004, 00005)
                 AND (date_trunc('month', jiraissue.duedate)::date = date_trunc('month', CURRENT_DATE)::date)
-            GROUP BY table_2."ID") AS issues_with_or
-    ),
+            GROUP BY table_2."ID") AS issues_with_or),
     with_5 AS
     (SELECT COUNT("ID")
         FROM
@@ -70,8 +66,7 @@ WITH
                 AND jiraissue.issuestatus::int = 00004 -- Completed
                 AND (date_trunc('month', jiraissue.duedate)::date = date_trunc('month', CURRENT_DATE)::date)
                 AND (date_trunc('month', jiraissue.resolutiondate)::date = date_trunc('month', CURRENT_DATE)::date)
-            GROUP BY table_2."ID") AS issues_with_or
-    )
+            GROUP BY table_2."ID") AS issues_with_or)
 SELECT
 --//-- Column №1
     (SELECT * FROM with_1) AS column_1,
